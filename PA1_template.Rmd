@@ -17,7 +17,7 @@ steps_dataset <- read.csv("./activity.csv", header = TRUE, na.strings = 'NA')
 ```{r date_summary, echo=TRUE}
 date_summary <- aggregate(steps~date, steps_dataset, sum)
 ```
-# Plot Histogram of steps taken each day:
+Plot Histogram of steps taken each day:
 
 ```{r hist, echo=TRUE}
 library(ggplot2)
@@ -34,7 +34,7 @@ Calculate mean number of steps taken each day:
 mean(date_summary$steps)
 ```
 
-The mean number of steps taken per day is 10,766.19 steps
+The mean number of steps taken per day is 10,766.19 steps.
 
 Calculate median number of steps taken each day:
 
@@ -42,7 +42,7 @@ Calculate median number of steps taken each day:
 median(date_summary$steps)
 ```
 
-The median number of steps taken per day is 10,765 steps
+The median number of steps taken per day is 10,765 steps.
 
 ## What is the average daily activity pattern?
 
@@ -56,6 +56,6 @@ Calculate number of NAs in dataset:
 summary(steps_dataset$steps)
 ```
 
-There are 2,304 NAs in the dataset
+There are 2,304 NAs in the dataset.
 
 ## Are there differences in activity patterns between weekdays and weekends?
