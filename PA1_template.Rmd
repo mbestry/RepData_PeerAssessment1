@@ -46,7 +46,19 @@ The median number of steps taken per day is 10,765 steps.
 
 ## What is the average daily activity pattern?
 
+Calculate average number of steps per 5-minute interval:
 
+```{r interval_averages, echo=TRUE}
+steps_interval <- aggregate(steps~interval, steps_dataset, mean)
+```
+
+Calculate 5-minute interval with highest average number of steps:
+
+```{r max_steps, echo=TRUE}
+print(steps_interval[which.max(steps_interval$steps),1]
+```
+
+Interval 835 has the highest average number of steps.
 
 ## Imputing missing values
 
