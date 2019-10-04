@@ -17,7 +17,7 @@ steps_dataset <- read.csv("./activity.csv", header = TRUE, na.strings = 'NA')
 ```{r date_summary, echo=TRUE}
 date_summary <- aggregate(steps~date, steps_dataset, sum)
 ```
-### Plot Histogram of steps taken each day:
+# Plot Histogram of steps taken each day:
 
 ```{r hist, echo=TRUE}
 library(ggplot2)
@@ -28,7 +28,7 @@ ylab('Steps')+
 ggtitle('Steps Taken per Day')
 ```
 
-### Calculate mean number of steps taken each day:
+Calculate mean number of steps taken each day:
 
 ```{r mean, echo=TRUE}
 mean(date_summary$steps)
@@ -36,7 +36,7 @@ mean(date_summary$steps)
 
 The mean number of steps taken per day is 10,766.19 steps
 
-### Calculate median number of steps taken each day:
+Calculate median number of steps taken each day:
 
 ```{r median, echo=TRUE}
 median(date_summary$steps)
@@ -50,7 +50,7 @@ The median number of steps taken per day is 10,765 steps
 
 ## Imputing missing values
 
-### Calculate number of NAs in dataset:
+Calculate number of NAs in dataset:
 
 ```{r na, echo=TRUE}
 summary(steps_dataset$steps)
