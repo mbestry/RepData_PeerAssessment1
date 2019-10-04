@@ -51,6 +51,12 @@ Calculate average number of steps per 5-minute interval:
 ```{r interval_averages, echo=TRUE}
 steps_interval <- aggregate(steps~interval, steps_dataset, mean)
 ```
+Plot time-series plot of average number of steps per 5-minute interval:
+
+```{r time_series_plot, echo=TRUE}
+plot(steps_interval$interval, steps_interval$steps, type = 'l', xlab = '5-minute Interval', 
+ylab = 'Steps', main = 'Average Number of Steps per 5-minute Interval')
+```
 
 Calculate 5-minute interval with highest average number of steps:
 
