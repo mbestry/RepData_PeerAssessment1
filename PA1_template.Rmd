@@ -8,11 +8,24 @@ output:
 
 ## Loading and preprocessing the data
 
-
+```{r loading, echo=TRUE}
+steps_dataset <- read.csv("./activity.csv", header = TRUE, na.strings = 'NA')
+```
 
 ## What is mean total number of steps taken per day?
 
+```{r date_summary, echo=TRUE}
+date_summary <- aggregate(steps~date, steps_dataset, sum)
+```
 
+```{r hist, echo=TRUE}
+library(ggplot2)
+ggplot(date_summary, aes(x=as.Date(date), y=steps))+
+geom_col(fill='black')+
+xlab('Date (Year = 2012)')+
+ylab('Steps')+
+ggtitle('Steps Taken per Day')
+```
 
 ## What is the average daily activity pattern?
 
