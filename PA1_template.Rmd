@@ -28,19 +28,13 @@ ylab('Steps')+
 ggtitle('Steps Taken per Day')
 ```
 
-Calculate mean number of steps taken each day:
+Calculate mean and median number of steps taken each day:
 
-```{r mean, echo=TRUE}
-mean(date_summary$steps)
+```{r summary, echo=TRUE}
+summary(date_summary$steps)
 ```
 
 The mean number of steps taken per day is 10,766.19 steps.
-
-Calculate median number of steps taken each day:
-
-```{r median, echo=TRUE}
-median(date_summary$steps)
-```
 
 The median number of steps taken per day is 10,765 steps.
 
