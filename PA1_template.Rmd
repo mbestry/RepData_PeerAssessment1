@@ -108,3 +108,9 @@ The median number of steps taken per day is 10,762 steps.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+```{r average_datasets, echo=TRUE}
+Imputed_dataset$day <- weekdays(as.Date(Imputed_dataset$date))
+weekday_averages <- aggregate(steps~interval, subset(Imputed_dataset, day != 'Saturday' & day != 'Sunday'), FUN=mean)
+weekend_averages <- aggregate(steps~interval, subset(Imputed_dataset, day == 'Saturday' | day == 'Sunday'), FUN=mean)
+```
