@@ -114,3 +114,15 @@ Imputed_dataset$day <- weekdays(as.Date(Imputed_dataset$date))
 weekday_averages <- aggregate(steps~interval, subset(Imputed_dataset, day != 'Saturday' & day != 'Sunday'), FUN=mean)
 weekend_averages <- aggregate(steps~interval, subset(Imputed_dataset, day == 'Saturday' | day == 'Sunday'), FUN=mean)
 ```
+
+Plot weekend and weekday average steps per 5-minute interval:
+
+```{r xyplot, echo=TRUE}
+library(lattice)
+xyplot(steps~interval, weekday_averages, type = 'l', main = 'Weekdays')
+xyplot(steps~interval, weekday_averages, type = 'l', main = 'Weekends')
+weekend_averages$category <- c('Weekend')
+weekday_averages$category <- c('Weekday')
+imputed_averages <- rbind(weekday_averages, weekend_averages)
+xyplot(steps~interval | category, imputed_averages, type='l')
+```
