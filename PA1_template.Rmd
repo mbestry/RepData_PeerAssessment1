@@ -1,6 +1,6 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output: 
+output:
   html_document:
     keep_md: true
 ---
@@ -34,7 +34,7 @@ Calculate mean and median number of steps taken each day:
 summary(date_summary$steps)
 ```
 
-The mean number of steps taken per day is 10,766.19 steps.
+The mean number of steps taken per day is 10,766 steps.
 
 The median number of steps taken per day is 10,765 steps.
 
@@ -55,7 +55,7 @@ ylab = 'Steps', main = 'Average Number of Steps per 5-minute Interval')
 Calculate 5-minute interval with highest average number of steps:
 
 ```{r max_steps, echo=TRUE}
-print(steps_interval[which.max(steps_interval$steps),1]
+print(steps_interval[which.max(steps_interval$steps),1])
 ```
 
 Interval 835 has the highest average number of steps.
@@ -73,6 +73,7 @@ There are 2,304 NAs in the dataset.
 Imputation performed based on rounded 5-minute interval averages:
 
 ```{r imputation, echo=TRUE}
+library(plyr)
 NA_dataset <- subset(steps_dataset, is.na(steps_dataset$steps))
 NA_dataset <- join(NA_dataset, steps_interval, by = 'interval')
 NA_dataset <- NA_dataset[,c(4,2,3)]
@@ -83,12 +84,13 @@ Imputed_dataset <- rbind(NA_dataset, Imputed_dataset)
 
 Determine total steps per day with imputation:
 
-```{r date_summary, echo=TRUE}
+```{r imputed_total_steps_per_day, echo=TRUE}
 Imputed_summary <- aggregate(steps~date, Imputed_dataset, sum)
 ```
+
 Plot Histogram of steps taken each day with Imputed Dataset:
 
-```{r hist, echo=TRUE}
+```{r imputed_hist, echo=TRUE}
 ggplot(Imputed_summary, aes(x=as.Date(date), y=steps))+
 geom_col(fill='black')+
 xlab('Date (Year = 2012)')+
@@ -98,7 +100,7 @@ ggtitle('Steps Taken per Day with Imputation')
 
 Calculate mean and median number of steps taken each day with Imputed Dataset:
 
-```{r summary, echo=TRUE}
+```{r imputed_summary, echo=TRUE}
 summary(Imputed_summary$steps)
 ```
 
@@ -108,6 +110,8 @@ The median number of steps taken per day is 10,762 steps.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+Subset weekday and weekend datasets from imputed dataset:
 
 ```{r average_datasets, echo=TRUE}
 Imputed_dataset$day <- weekdays(as.Date(Imputed_dataset$date))
@@ -119,10 +123,8 @@ Plot weekend and weekday average steps per 5-minute interval:
 
 ```{r xyplot, echo=TRUE}
 library(lattice)
-xyplot(steps~interval, weekday_averages, type = 'l', main = 'Weekdays')
-xyplot(steps~interval, weekday_averages, type = 'l', main = 'Weekends')
 weekend_averages$category <- c('Weekend')
 weekday_averages$category <- c('Weekday')
 imputed_averages <- rbind(weekday_averages, weekend_averages)
-xyplot(steps~interval | category, imputed_averages, type='l', layout=c(1,2))
+xyplot(steps~interval | category, imputed_averages, type='l', xlab = 'Interval', ylab = 'Number of Steps', layout=c(1,2))
 ```
