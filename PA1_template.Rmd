@@ -124,5 +124,5 @@ xyplot(steps~interval, weekday_averages, type = 'l', main = 'Weekends')
 weekend_averages$category <- c('Weekend')
 weekday_averages$category <- c('Weekday')
 imputed_averages <- rbind(weekday_averages, weekend_averages)
-xyplot(steps~interval | category, imputed_averages, type='l')
+xyplot(steps~interval | category, imputed_averages, type='l', layout=c(1,2))
 ```
